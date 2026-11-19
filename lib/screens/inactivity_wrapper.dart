@@ -4,8 +4,13 @@ import '../services/api_service.dart';
 
 class InactivityWrapper extends StatefulWidget {
   final Widget child;
+  final GlobalKey<NavigatorState>? navigatorKey;
   
-  const InactivityWrapper({super.key, required this.child});
+  const InactivityWrapper({
+    super.key,
+    required this.child,
+    this.navigatorKey,
+  });
 
   @override
   State<InactivityWrapper> createState() => _InactivityWrapperState();
@@ -22,7 +27,7 @@ class _InactivityWrapperState extends State<InactivityWrapper> {
 
   void _startTimer() {
     _timer?.cancel();
-    // Se configura en 2 minutos
+    // Se configura en 2 minutos (ideal para el stand de feria)
     _timer = Timer(const Duration(minutes: 2), _logoutUsuario);
   }
 
@@ -31,10 +36,16 @@ class _InactivityWrapperState extends State<InactivityWrapper> {
   }
 
   void _logoutUsuario() {
+    if (ApiService.currentUserId == null) return;
+
     ApiService.logout();
     if (mounted) {
       // Expulsa al usuario por seguridad y lo manda al login
-      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      if (widget.navigatorKey?.currentState != null) {
+        widget.navigatorKey!.currentState!.pushNamedAndRemoveUntil('/', (route) => false);
+      } else {
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Sesión cerrada por inactividad. Privacidad protegida.'),
