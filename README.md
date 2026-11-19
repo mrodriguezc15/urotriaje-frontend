@@ -1,6 +1,6 @@
 # urotriaje_app
 
-A new Flutter project.
+Proyecto educativo
 
 ## Getting Started
 
