@@ -28,7 +28,7 @@ class ChatEvaluationResponse {
 }
 
 class ApiService {
-  // Ajustamos la URL base dependiendo de si estamos en web o en un emulador Android
+  // Ajustamos la URL base dependiendo de si estamos en web o en un emulador Android (pruebas locales)
   static String get baseUrl {
     if (kIsWeb) {
       return 'https://urotriaje-api.onrender.com'; 

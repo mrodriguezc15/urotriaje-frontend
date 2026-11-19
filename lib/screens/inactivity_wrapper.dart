@@ -27,7 +27,7 @@ class _InactivityWrapperState extends State<InactivityWrapper> {
 
   void _startTimer() {
     _timer?.cancel();
-    // Se configura en 2 minutos (ideal para el stand de feria)
+    // Se configura en 2 minutos
     _timer = Timer(const Duration(minutes: 2), _logoutUsuario);
   }
 

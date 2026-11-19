@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/evaluation_model.dart';
 import '../services/api_service.dart';
-// Se importa la pantalla de resultados para gestionar el enrutamiento desde el historial
 import 'result_screen.dart'; 
 
 class HistoryScreen extends StatelessWidget {
